@@ -1,34 +1,40 @@
 import './App.css';
 import Plot from 'react-plotly.js';
 
-const App = () => {
-  const z1 = [
-    [8.83, 8.89, 8.81, 8.87, 8.90, 8.87],
-    [8.89, 8.94, 8.85, 8.94, 8.96, 8.92],
-    [8.84, 8.90, 8.82, 8.92, 8.93, 8.91],
-    [8.79, 8.85, 8.79, 8.90, 8.94, 8.92],
-    [8.79, 8.88, 8.81, 8.90, 8.95, 8.92],
-    [8.80, 8.82, 8.78, 8.91, 8.94, 8.92],
-    [8.75, 8.78, 8.77, 8.91, 8.95, 8.92],
-    [8.80, 8.80, 8.77, 8.91, 8.95, 8.94],
-    [8.74, 8.81, 8.76, 8.93, 8.98, 8.99],
-    [8.89, 8.99, 8.92, 9.10, 9.13, 9.11],
-    [8.97, 8.97, 8.91, 9.09, 9.11, 9.11],
-    [9.04, 9.08, 9.05, 9.25, 9.28, 9.27],
-    [9.00, 9.01, 9.00, 9.20, 9.23, 9.20],
-    [8.99, 8.99, 8.98, 9.18, 9.20, 9.19],
-    [8.93, 8.97, 8.97, 9.18, 9.20, 9.18]
-  ];
+import plotData from "./data";
 
+const App = () => {
+
+  const data = [{
+    z: plotData,
+    type: 'surface',
+    contours: {
+      z: {
+        show:true,
+        usecolormap: true,
+        highlightcolor:"#42f462",
+        project:{z: true}
+      }
+    }
+  }];
+
+  const layout = {
+    title: 'Mt Bruno Elevation With Projected Contours',
+    scene: {camera: {eye: {x: 1.87, y: 0.88, z: -0.64}}},
+    autosize: false,
+    width: 500,
+    height: 500,
+    margin: {
+      l: 65,
+      r: 50,
+      b: 65,
+      t: 90,
+    }
+  };
   return (
     <Plot
-      data={[
-        {
-          z: z1,
-          type: 'surface'
-        },
-      ]}
-      layout={{width: 600, height: 600, title: 'A Fancy Plot'}}
+      data={data}
+      layout={layout}
     />
   );
 };
